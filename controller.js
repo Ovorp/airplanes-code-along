@@ -1,6 +1,8 @@
 function getPlanes(req, res, next) {
   const db = req.app.get('db');
-  db.get_planes()
+  const { numberOfPass } = req.query;
+  const passCount = numberOfPass ? [numberOfPass] : [0];
+  db.get_planes(passCount)
     .then((planes) => {
       res.status(200).json(planes);
     })
